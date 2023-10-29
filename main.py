@@ -15,19 +15,23 @@ class Student:
                 lecturer.grades_lecturer[course] = [grade]
         else:
             return 'Ошибка'
-    def grades_average(self):
+    def grades_average_homework(self):
         grades_count = 0
         grades_sum = 0
         for grade in self.grades_student:
             grades_count += len(self.grades_student[grade])
             grades_sum += sum(self.grades_student[grade])
-        return grades_sum / grades_count
+            if grades_count > 0:
+                return grades_sum / grades_count
+            else:
+                return 0
+
 
 
     def __str__(self):
         return (f"Имя: {self.name}\n"
                 f"Фамилия: {self.surname}\n"
-                f"Средняя оценка за домашние задания: {', '.join(self.grades_average_homework)}\n"
+                f"Средняя оценка за домашние задания: {self.grades_average_homework}\n"
                 f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)}\n"
                 f"Завершенные курсы: {', '.join(self.finished_courses)}\n")
 
@@ -99,7 +103,7 @@ print(mentor_reviewer_1)
 print(mentor_lecturer_2)
 print(student_1)
 
-student_1.grades_average()
-print(student_1)
+# student_1.grades_average_homework()
+# print(student_1)
 
 print('ok')
