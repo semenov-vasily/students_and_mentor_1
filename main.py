@@ -7,7 +7,6 @@ class Student:
         self.courses_in_progress = []
         self.grades_student = {}
         self.grades_average_homework = []
-
     def rate_hw_lecturer(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
             if course in lecturer.grades_lecturer:
@@ -16,7 +15,13 @@ class Student:
                 lecturer.grades_lecturer[course] = [grade]
         else:
             return 'Ошибка'
-
+    def grades_average(self):
+        grades_count = 0
+        grades_sum = 0
+        for grade in self.grades_student:
+            grades_count += len(self.grades_student[grade])
+            grades_sum += sum(self.grades_student[grade])
+        return grades_sum / grades_count
 
 
     def __str__(self):
@@ -92,6 +97,9 @@ print(mentor_lecturer_2.grades_lecturer)
 
 print(mentor_reviewer_1)
 print(mentor_lecturer_2)
+print(student_1)
+
+student_1.grades_average()
 print(student_1)
 
 print('ok')
