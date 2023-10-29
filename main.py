@@ -29,6 +29,10 @@ class Student:
             else:
                 return 0
 
+    def __lt__(self, other):
+        pass
+
+
 
     def __str__(self):
         return (f"Имя: {self.name}\n"
@@ -106,8 +110,8 @@ mentor_lecturer_2.courses_attached += ['Python']
 
 mentor_reviewer_1.rate_hw_student(student_1, 'Python', 10)
 mentor_reviewer_1.rate_hw_student(student_1, 'Python', 10)
-mentor_reviewer_1.rate_hw_student(student_1, 'Python', 10)
-mentor_reviewer_1.rate_hw_student(student_1, 'Git', 10)
+mentor_reviewer_1.rate_hw_student(student_1, 'Python', 8)
+mentor_reviewer_1.rate_hw_student(student_1, 'Git', 8)
 
 student_1.rate_hw_lecturer(mentor_lecturer_2, 'Python', 10)
 student_1.rate_hw_lecturer(mentor_lecturer_2, 'Python', 10)
