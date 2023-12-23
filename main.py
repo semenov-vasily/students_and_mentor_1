@@ -1,5 +1,6 @@
 class Student:
     student_list = []
+
     def __init__(self, name, surname, gender):
         self.name = name
         self.surname = surname
@@ -9,9 +10,9 @@ class Student:
         self.grades_student = {}
         Student.student_list.append(self)
 
-
     def rate_hw_lecturer(self, lecturer, course, grade):
-        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
+        if isinstance(lecturer,
+                      Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
             if course in lecturer.grades_lecturer:
                 lecturer.grades_lecturer[course] += [grade]
             else:
@@ -30,24 +31,23 @@ class Student:
         else:
             return 0
 
-
     def __gt__(self, other):
         if not isinstance(other, Student):
             print('Сравниваются объекты разных классов')
             return
         return self.grades_average() > other.grades_average()
+
     def __lt__(self, other):
         if not isinstance(other, Student):
             print('Сравниваются объекты разных классов')
             return
         return self.grades_average() < other.grades_average()
+
     def __eq__(self, other):
         if not isinstance(other, Student):
             print('Сравниваются объекты разных классов')
             return
         return self.grades_average() == other.grades_average()
-
-
 
     def __str__(self):
         return (f"Имя: {self.name}\n"
@@ -66,12 +66,12 @@ class Mentor:
 
 class Lecturer(Mentor):
     lecturer_list = []
+
     def __init__(self, name, surname):
         super().__init__(name, surname)
         self.courses_attached = []
         self.grades_lecturer = {}
         Lecturer.lecturer_list.append(self)
-
 
     def grades_average_(self):
         grades_count = 0
@@ -89,11 +89,13 @@ class Lecturer(Mentor):
             print('Сравниваются объекты разных классов')
             return
         return self.grades_average_() > other.grades_average_()
+
     def __lt__(self, other):
         if not isinstance(other, Lecturer):
             print('Сравниваются объекты разных классов')
             return
         return self.grades_average_() < other.grades_average_()
+
     def __eq__(self, other):
         if not isinstance(other, Lecturer):
             print('Сравниваются объекты разных классов')
@@ -110,7 +112,6 @@ class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
 
-
     def rate_hw_student(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
             if course in student.grades_student:
@@ -120,10 +121,10 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
-
     def __str__(self):
         return (f"Имя: {self.name}\n"
                 f"Фамилия: {self.surname}\n")
+
 
 def courses_average_students(student_list, course):
     for student in student_list:
@@ -133,6 +134,7 @@ def courses_average_students(student_list, course):
                 print(f"Студент: {student.name} {student.surname}\n"
                       f"Курс: {cours_name}\n"
                       f"Cредняя оценка за домашние задания: {round(sum_average, 0)}\n")
+
 
 def courses_average_lecturer(lecturer_list, course):
     for lecturer in lecturer_list:
@@ -198,13 +200,17 @@ student_2.rate_hw_lecturer(mentor_lecturer_2, 'Python', 10)
 student_2.rate_hw_lecturer(mentor_lecturer_2, 'Python', 7)
 student_2.rate_hw_lecturer(mentor_lecturer_2, 'Git', 8)
 
-print(f'Оценки студента {student_1.name} {student_1.surname}: ', *[f"{key}: {', '.join(map(str, value))}" for key, value in student_1.grades_student.items()])
-print(f'Оценки студента {student_2.name} {student_2.surname}: ', *[f"{key}: {', '.join(map(str, value))}" for key, value in student_2.grades_student.items()])
+print(f'Оценки студента {student_1.name} {student_1.surname}: ',
+      *[f"{key}: {', '.join(map(str, value))}" for key, value in student_1.grades_student.items()])
+print(f'Оценки студента {student_2.name} {student_2.surname}: ',
+      *[f"{key}: {', '.join(map(str, value))}" for key, value in student_2.grades_student.items()])
 print(f'Курсы студента {student_1.name} {student_1.surname}: ', ', '.join(student_1.courses_in_progress))
 print(f'Курсы студента {student_2.name} {student_2.surname}: ', ', '.join(student_2.courses_in_progress))
 
-print(f'Оценки лектора {mentor_lecturer_1.name} {mentor_lecturer_1.surname}: ', *[f"{key}: {', '.join(map(str, value))}" for key, value in mentor_lecturer_1.grades_lecturer.items()])
-print(f'Оценки лектора {mentor_lecturer_2.name} {mentor_lecturer_2.surname}: ', *[f"{key}: {', '.join(map(str, value))}" for key, value in mentor_lecturer_2.grades_lecturer.items()])
+print(f'Оценки лектора {mentor_lecturer_1.name} {mentor_lecturer_1.surname}: ',
+      *[f"{key}: {', '.join(map(str, value))}" for key, value in mentor_lecturer_1.grades_lecturer.items()])
+print(f'Оценки лектора {mentor_lecturer_2.name} {mentor_lecturer_2.surname}: ',
+      *[f"{key}: {', '.join(map(str, value))}" for key, value in mentor_lecturer_2.grades_lecturer.items()])
 print()
 
 print(mentor_reviewer_1)
@@ -214,22 +220,26 @@ print(student_1)
 print(student_2)
 
 if student_1 > student_2:
-    print(f'Средняя оценка {student_1.name} {student_1.surname} больше, чем средняя оценка {student_2.name} {student_2.surname}')
+    print(
+        f'Средняя оценка {student_1.name} {student_1.surname} больше, чем средняя оценка {student_2.name} {student_2.surname}')
 elif student_1 < student_2:
-    print(f'Средняя оценка {student_1.name} {student_1.surname} меньше, чем средняя оценка {student_2.name} {student_2.surname}')
+    print(
+        f'Средняя оценка {student_1.name} {student_1.surname} меньше, чем средняя оценка {student_2.name} {student_2.surname}')
 else:
-    print(f'Средняя оценка {student_1.name} {student_1.surname}  равна средней оценке {student_2.name} {student_2.surname}')
+    print(
+        f'Средняя оценка {student_1.name} {student_1.surname}  равна средней оценке {student_2.name} {student_2.surname}')
 print()
-
 
 if mentor_lecturer_1 > mentor_lecturer_1:
-    print(f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname} больше, чем средняя оценка {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
+    print(
+        f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname} больше, чем средняя оценка {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
 elif mentor_lecturer_1 < mentor_lecturer_1:
-    print(f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname} меньше, чем средняя оценка {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
+    print(
+        f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname} меньше, чем средняя оценка {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
 else:
-    print(f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname}  равна средней оценке {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
+    print(
+        f'Средняя оценка {mentor_lecturer_1.name} {mentor_lecturer_1.surname}  равна средней оценке {mentor_lecturer_2.name} {mentor_lecturer_2.surname}')
 print()
-
 
 courses_average_students(Student.student_list, 'Python')
 courses_average_lecturer(Lecturer.lecturer_list, 'Git')
